@@ -1,3 +1,7 @@
+//This code for sending date from Zoho Widget to Zoho CRM's Client Script
+
+
+//Widget Code 
 <!DOCTYPE html>	<html>
 	<head>
 	    <meta charset="UTF-8">
@@ -24,3 +28,42 @@
 	
 	</body>
 	</html>
+
+
+// Client Script Code  
+
+
+// Define an async function to handle the process
+async function handleWidget() {
+    try {
+        // Open the widget and pass data
+        const widgetResponse = await ZDK.Client.openPopup({
+            api_name: 'city_search',
+            type: 'widget',
+            header: 'חיפוש עיר ',
+            animation_type: 1,
+            height: '200px',
+            width: '300px',
+            left: '150px',
+        }, {
+            additional_data: 'ExampleData'
+        });
+
+        console.log("Widget Response:", widgetResponse);
+
+        // Handle the widget response
+        if (widgetResponse && widgetResponse.choice === 'selected_City') {
+            console.log("Selected City Received:", widgetResponse.value);
+
+            // Update a field with the received full name
+            ZDK.Page.getField('field15').setValue(widgetResponse.value);
+        } else {
+            console.log("No data received or canceled.");
+        }
+    } catch (error) {
+        console.error("Error while interacting with widget:", error);
+    }
+}
+
+// Call the async function
+handleWidget();
