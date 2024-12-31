@@ -1,0 +1,26 @@
+<!DOCTYPE html>	<html>
+	<head>
+	    <meta charset="UTF-8">
+	    <script src="https://live.zwidgets.com/js-sdk/1.2/ZohoEmbededAppSDK.min.js"></script>
+	</head>
+	<body>
+	    <h2>This is a sample Widget built using Zoho Extension toolkit.</h2>
+    <label for="fname">First name:</label>
+    <input type="text" id="fname" name="fname"><br><br>
+    <label for="lname">Last name:</label>
+    <input type="text" id="lname" name="lname"><br><br>
+   <button type="submit" id="submit" onclick="submit()">submit</button>
+    <script>	
+       ZOHO.embeddedApp.init();
+	        function submit()
+	        {
+            console.log("Submitted");
+	            var fn = document.getElementById("fname").value;
+            var ln = document.getElementById("lname").value;
+	            var full = fn + " " + ln;
+	            $Client.close({ choice: 'Name', value: full });
+	        }
+	    </script>
+	
+	</body>
+	</html>
