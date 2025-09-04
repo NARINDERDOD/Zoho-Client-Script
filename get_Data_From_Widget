@@ -1,0 +1,14 @@
+   var selectedCity = ZDK.Client.openPopup({
+    api_name: 'city', // Replace with your widget's API name
+    type: 'widget',
+    header: 'My Custom Widget',
+    animation_type: 4, // Example animation type
+    height: '300px',
+    width: '500px'
+}, {
+
+   
+});
+
+
+console.log("city ", selectedCity);
