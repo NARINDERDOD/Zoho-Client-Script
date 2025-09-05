@@ -6,9 +6,10 @@
     height: '300px',
     width: '500px'
 }, {
-
+           data: "dataToPass" // Data passed to the widget
    
 });
 
 
-console.log("city ", selectedCity);
+console.log("city ", selectedCity); // get data from widget 
+
