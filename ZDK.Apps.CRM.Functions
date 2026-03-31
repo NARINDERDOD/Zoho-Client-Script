@@ -1,0 +1,8 @@
+   var dealId = $Page.record_id;
+
+var response = ZDK.Apps.CRM.Functions.execute("recommend_serial_number", {
+    dealId: $Page.record_id
+});
+
+
+    log("resp ",response); 
