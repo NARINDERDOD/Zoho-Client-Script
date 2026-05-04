@@ -1,0 +1,38 @@
+module_ID = $Page.record_id;
+
+const quotesDetails = ZDK.Apps.CRM.Quotes.fetchById(module_ID);
+const _Product_Details = quotesDetails._Product_Details;
+
+const subformRows = [];
+
+for (const element of _Product_Details) {
+    const product_id = element._product_Lookup_Id;
+    const product_Details = ZDK.Apps.CRM.Products.fetchById(product_id);
+console.log("update product_Details ", product_Details);
+    subformRows.push({
+        id: element.id,                                          // subform row ID (required to update)
+        Terms_And_Conditions: product_Details.Terms_And_Conditions
+    });
+}
+console.log("subformRows", subformRows);
+
+const payload = {
+    data: [
+        {
+            id: module_ID,
+            Quoted_Items: subformRows
+        }
+    ]
+};
+
+const response = await zrc.put('/crm/v8/Quotes/' + module_ID, payload);
+console.log("update response ", response);
+
+
+// Get the subform object
+const subform = ZDK.Page.getSubform("Quoted_Items").getField("Terms_And_Conditions").setVisibility(false);
+console.log("Terms_And_Conditions hide  from sub form  ", subform);
+
+
+
+
